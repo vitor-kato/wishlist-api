@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  api:
+    image: wishlist-dev:latest
+    build:
+      context: ./config
+      target: "develop"
+    env_file:
+      - .env.defaults
+      - .env
+
+  db:
+    image: postgres
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    env_file:
+      - .env.defaults
+      - .env
+
+volumes:
+  postgres_data_dev:
+    driver: local
