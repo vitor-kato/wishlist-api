@@ -7,6 +7,7 @@ from .exceptions import ProductUnavailableError
 
 class ProductClient:
     base_url = settings.PRODUCT_DATA_API
+    cache_time = settings.PRODUCT_DATA_API_CACHE_TIME
 
     def __init__(self, id):
         self.id = id
@@ -22,7 +23,7 @@ class ProductClient:
         return self.data
 
     def set_cache(self, data):
-        cache.set(self.cache_key, data, 60)
+        cache.set(self.cache_key, data, self.cache_time)
 
     def get_cache(self):
         data = cache.get(self.cache_key)
