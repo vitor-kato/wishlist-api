@@ -11,6 +11,8 @@ django-environ = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
 gunicorn = "*"
+requests = "*"
+django-filter = "*"
 
 [dev-packages]
 pre-commit = "*"
