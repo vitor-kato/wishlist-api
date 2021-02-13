@@ -495,6 +495,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Products pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/customer/{{customer_id}}/?product_page=1&size=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"{{customer_id}}",
+						""
+					],
+					"query": [
+						{
+							"key": "product_page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {

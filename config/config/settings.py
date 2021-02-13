@@ -33,6 +33,7 @@ env = environ.Env(
     JWT_ACCESS_TOKEN_LIFETIME=(int, 999),
     JWT_REFRESH_TOKEN_LIFETIME=(int, 1),
     PRODUCT_DATA_API_CACHE_TIME=(int, 3600),
+    PAGE_SIZE=(int, 50),
 )
 
 
@@ -109,7 +110,7 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.BrowsableAPIRenderer",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 50,
+    "PAGE_SIZE": env("PAGE_SIZE"),
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
