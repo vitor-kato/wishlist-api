@@ -48,6 +48,13 @@ To get a local copy up and running follow these simple steps.
 
 ## Usage
 
+If you loaded the initial fixtures, the user: `api` is on the database with the password: `pass`
+Otherwise a user can be created using the shell:
+
+```sh
+docker-compose exec api ./manage.py createsuperuser
+```
+
 To use the API an authenticated user is required. This project is currently using JWT for this purpose. Using curl:
 
 ```sh
