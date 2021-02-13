@@ -7,7 +7,7 @@ from config.base_models import User
 from .models import Customer
 
 
-class AuthTestCase(TestCase):
+class CustomerTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create(username="test-user", password="")
         Customer.objects.create(user=self.user, name="test-name", email="test-email")
