@@ -12,7 +12,7 @@ class Wishlist(BaseAbstractModel):
     )
 
     def __str__(self):
-        return self.customer
+        return self.customer.email
 
 
 class Product(BaseAbstractModel):
