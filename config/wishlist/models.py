@@ -11,6 +11,9 @@ class Wishlist(BaseAbstractModel):
         Customer, related_name="wishlist", on_delete=models.CASCADE, blank=False
     )
 
+    def __str__(self):
+        return self.customer
+
 
 class Product(BaseAbstractModel):
     external_id = models.CharField(max_length=300, blank=False)
@@ -29,3 +32,6 @@ class Product(BaseAbstractModel):
         c = ProductClient(self.external_id)
         product_data = c.get_cache()
         return product_data
+
+    def __str__(self):
+        return self.external_id
