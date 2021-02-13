@@ -10,10 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import logging
+import os
 from datetime import timedelta
 from pathlib import Path
 
 import environ
+from django.utils.log import DEFAULT_LOGGING
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -179,6 +182,51 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = "static/"
 
+# LOGGING definition
+
+# Disable Django's logging setup
+LOGGING_CONFIG = None
+
+LOGFILE = "logs/api.log"
+os.makedirs(os.path.dirname(LOGFILE), exist_ok=True)
+
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "default": {
+                "format": "%(asctime)s - %(name)-12s:%(lineno)d - %(levelname)s - %(message)s -",
+            },
+            "django.server": DEFAULT_LOGGING["formatters"]["django.server"],
+        },
+        "handlers": {
+            "file": {
+                "level": "INFO",
+                "class": "logging.FileHandler",
+                "filename": LOGFILE,
+                "formatter": "default",
+            },
+            "console": {
+                "level": "DEBUG",
+                "class": "logging.StreamHandler",
+                "formatter": "default",
+            },
+            "null": {
+                "class": "logging.NullHandler",
+            },
+            "django.server": DEFAULT_LOGGING["handlers"]["django.server"],
+        },
+        "loggers": {
+            "": {
+                "handlers": ["file", "console"],
+                "propagate": True,
+                "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            },
+        },
+        "django.server": DEFAULT_LOGGING["loggers"]["django.server"],
+    }
+)
 
 PRODUCT_DATA_API = env("PRODUCT_DATA_API")
 PRODUCT_DATA_API_CACHE_TIME = env("PRODUCT_DATA_API_CACHE_TIME")
