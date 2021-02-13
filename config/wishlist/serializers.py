@@ -18,6 +18,11 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_data(self, instance):
         return instance.get_product_data()
 
+    def to_representation(self, obj):
+        repr = super(ProductSerializer, self).to_representation(obj)
+        repr.pop("external_id")
+        return repr
+
 
 class WishlistSerializer(serializers.ModelSerializer):
     """Serializer for Wishlist data """
