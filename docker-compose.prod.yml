@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  api:
+    image: ${DOCKER_IMAGE-wishlist-prod}:${TAG-latest}
+    build:
+      context: ./config
+      target: "prod"
+    env_file:
+      - .env.defaults
+      - .env
+    environment:
+      - ENV=prod
+    ports:
+      - 8000:8000
+
+  db:
+    image: postgres
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    env_file:
+      - .env.defaults
+      - .env
+
+volumes:
+  postgres_data_prod:
+    driver: local
