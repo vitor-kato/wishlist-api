@@ -15,6 +15,11 @@ class CustomerViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ["name", "email", "wishlist__products__external_id"]
 
+    def validate_product(self):
+        id = self.request.data.get("external_id")
+        product_serializer = ProductSerializer(data={"external_id": id})
+        return product_serializer, id
+
     def get_queryset(self):
         return Customer.objects.filter(user=self.request.user)
 
@@ -26,9 +31,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         customer = self.get_object()
         wishlist = customer.wishlist
 
-        id = self.request.data.get("external_id")
-        product_serializer = ProductSerializer(id)
-        product_serializer = ProductSerializer(data={"external_id": id})
+        product_serializer, id = self.validate_product()
         if not product_serializer.is_valid():
             return Response(product_serializer.errors)
 
@@ -42,9 +45,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         customer = self.get_object()
         wishlist = customer.wishlist
 
-        id = self.request.data.get("external_id")
-        product_serializer = ProductSerializer(id)
-        product_serializer = ProductSerializer(data={"external_id": id})
+        product_serializer, id = self.validate_product()
         if not product_serializer.is_valid():
             return Response(product_serializer.errors)
 
