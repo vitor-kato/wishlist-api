@@ -28,7 +28,7 @@ class WishlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wishlist
         # fields = "__all__"
-        exclude = ("created_at", "updated_at")
+        exclude = ("id", "created_at", "updated_at", "customer")
 
     def get_total_products(self, instance):
         return instance.products.count()
