@@ -37,7 +37,7 @@ class ProductClient:
 
     def get_data(self):
         url = f"{self.base_url}/{self.id}/"
-        logger.info(f"[ProductClient] - Getting data from {url}")
+        logger.debug(f"[ProductClient] - Getting data from {url}")
         r = requests.get(url)
         self.status = r.status_code
         if not r.status_code == 200:

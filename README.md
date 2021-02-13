@@ -79,3 +79,13 @@ is available so you type any URL in your browser to see in action:
 
 Postman documentation is also provided on the `docs/postman` directory
 all endpoints are described in there with usage and examples
+
+### Testing
+
+Tests are using both Django and DRF testing suite.
+
+To run the tests use:
+
+```sh
+./start_dev.sh run api ./manage.py test
+```
