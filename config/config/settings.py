@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "django_filters",
+    "drf_yasg",
     "customers",
     "wishlist",
 ]
