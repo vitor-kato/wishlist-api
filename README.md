@@ -87,6 +87,13 @@ is available so you type any URL in your browser to see in action:
 Postman documentation is also provided on the `docs/postman` directory
 all endpoints are described in there with usage and examples
 
+### Swagger and Redoc
+
+Also provided at the following endpoints:
+
+- `http://localhost:8000/docs/swagger/`
+- `http://localhost:8000/docs/redoc/`
+
 ### Testing
 
 Tests are using both Django and DRF testing suite.
