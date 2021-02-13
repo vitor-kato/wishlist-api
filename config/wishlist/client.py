@@ -1,8 +1,12 @@
+import logging
+
 import requests
 from django.conf import settings
 from django.core.cache import cache
 
 from .exceptions import ProductUnavailableError
+
+logger = logging.getLogger(__name__)
 
 
 class ProductClient:
@@ -33,19 +37,24 @@ class ProductClient:
 
     def get_data(self):
         url = f"{self.base_url}/{self.id}/"
+        logger.info(f"[ProductClient] - Getting data from {url}")
         r = requests.get(url)
         self.status = r.status_code
         if not r.status_code == 200:
+            logger.debug(f"[ProductClient] - product unavailable with id {self.id}")
             raise ProductUnavailableError
+
         self.data = r.json()
         self.set_cache(self.data)
         return self.data
 
     def set_cache(self, data):
+        logger.debug(f"[ProductClient] - Data Cached for product: {self.id}")
         cache.set(self.cache_key, data, self.cache_time)
 
     def get_cache(self):
         data = cache.get(self.cache_key)
         if not data:
+            logger.debug(f"[ProductClient] - Data Expired for product: {self.id}")
             return self.get_data()
         return data
