@@ -1,4 +1,4 @@
-from rest_framework import filters, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from wishlist.models import Product
@@ -38,7 +38,9 @@ class CustomerViewSet(viewsets.ModelViewSet):
         product, _ = Product.objects.get_or_create(external_id=id)
         product.wishlist.add(wishlist)
 
-        return Response(CustomerSerializer(customer).data)
+        return Response(
+            CustomerSerializer(customer).data, status=status.HTTP_201_CREATED
+        )
 
     @action(detail=True, methods=["post"], url_path="remove-product")
     def remove_product(self, request, pk=None):
@@ -52,4 +54,4 @@ class CustomerViewSet(viewsets.ModelViewSet):
         product = Product.objects.get(external_id=id)
         product.wishlist.remove(wishlist)
 
-        return Response(CustomerSerializer(customer).data)
+        return Response(CustomerSerializer(customer).data, status=status.HTTP_200_OK)
