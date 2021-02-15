@@ -4,13 +4,13 @@ services:
   api:
     image: wishlist-dev:latest
     build:
-      context: ./config
+      context: ./backend
       target: "develop"
       args:
         INSTALL_JUPYTER: "true"
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./config:/webapps
+      - ./backend:/webapps
     env_file:
       - .env.defaults
       - .env
