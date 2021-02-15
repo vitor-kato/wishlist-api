@@ -4,7 +4,7 @@ services:
   api:
     image: wishlist-dev:latest
     build:
-      context: ./config
+      context: ./backend
       target: "develop"
     env_file:
       - .env.defaults
