@@ -20,8 +20,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
         product_serializer = ProductSerializer(data={"external_id": id})
         return product_serializer, id
 
-    def get_queryset(self):
-        return Customer.objects.filter(user=self.request.user)
+    # def get_queryset(self):
+    #     return Customer.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

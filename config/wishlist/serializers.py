@@ -91,4 +91,7 @@ class WishlistSerializer(serializers.ModelSerializer):
     def paginated_products(self, instance):
         products = self.get_pagination(instance)
         serializer = ProductSerializer(products, many=True)
-        return serializer.data
+        result = []
+        for i in serializer.data:
+            result.append(i["data"])
+        return result
