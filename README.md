@@ -82,6 +82,36 @@ is available so you type any URL in your browser to see in action:
 
 ![Customer get response](./docs/images/customer_get.png)
 
+Adding products to a customer:
+
+```sh
+curl \
+  -X POST \
+  -H "Authorization: Bearer eyJ0eXAiOi..." \
+  -H "Content-Type: application/json" \
+  -d '{"external_id": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"}' \
+  http://localhost:8000/api/customer/1/add-product/
+```
+
+Removing products from a customer:
+
+```sh
+curl \
+  -X POST \
+  -H "Authorization: Bearer eyJ0eXAiOi..." \
+  -H "Content-Type: application/json" \
+  -d '{"external_id": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"}' \
+  http://localhost:8000/api/customer/1/remove-product/
+```
+
+Pagination to products on responses:
+
+```sh
+curl \
+  -H "Authorization: Bearer eyJ0eXAiOi..." \
+  http://localhost:8000/api/customer/1/?product_page=1&size=10
+```
+
 ### Postman
 
 Postman documentation is also provided on the `docs/postman` directory
